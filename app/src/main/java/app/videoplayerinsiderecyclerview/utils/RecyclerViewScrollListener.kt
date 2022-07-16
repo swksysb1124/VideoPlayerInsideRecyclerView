@@ -11,7 +11,11 @@ abstract class RecyclerViewScrollListener : RecyclerView.OnScrollListener() {
     @Volatile
     private var mEnabled = true
     private var mPreLoadCount = 0
-    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+    override fun onScrolled(
+        recyclerView: RecyclerView,
+        dx: Int,
+        dy: Int
+    ) {
         super.onScrolled(recyclerView, dx, dy)
         if (mEnabled) {
             val manager = recyclerView.layoutManager

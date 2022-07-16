@@ -11,7 +11,7 @@ import app.videoplayerinsiderecyclerview.R
 import app.videoplayerinsiderecyclerview.databinding.FacebookTimelineItemRecyclerListBinding
 import app.videoplayerinsiderecyclerview.models.MediaObject
 import app.videoplayerinsiderecyclerview.utils.PlayerStateCallback
-import app.videoplayerinsiderecyclerview.utils.PlayerViewAdapter.Companion.releaseRecycledPlayers
+import app.videoplayerinsiderecyclerview.utils.PlayerViewAdapter.releaseRecycledPlayers
 import com.google.android.exoplayer2.Player
 import java.util.*
 
@@ -20,7 +20,8 @@ import java.util.*
  */
 class FacebookRecyclerAdapter(
     private val mContext: Context,
-    private var modelList: ArrayList<MediaObject>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), PlayerStateCallback {
+    private var modelList: ArrayList<MediaObject>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), PlayerStateCallback {
 
     private var mItemClickListener: OnItemClickListener? =
         null
@@ -34,14 +35,20 @@ class FacebookRecyclerAdapter(
         viewGroup: ViewGroup,
         viewType: Int
     ): VideoPlayerViewHolder {
-        val binding: FacebookTimelineItemRecyclerListBinding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context)
-            , R.layout.facebook_timeline_item_recycler_list, viewGroup, false)
+        val binding: FacebookTimelineItemRecyclerListBinding =
+            DataBindingUtil.inflate(
+                LayoutInflater.from(viewGroup.context),
+                R.layout.facebook_timeline_item_recycler_list,
+                viewGroup,
+                false
+            )
         return VideoPlayerViewHolder(binding)
     }
 
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
-        position: Int) {
+        position: Int
+    ) {
 
         //Here you can fill your row view
         if (holder is VideoPlayerViewHolder) {
@@ -67,7 +74,7 @@ class FacebookRecyclerAdapter(
         return modelList[position]
     }
 
-    fun SetOnItemClickListener(mItemClickListener: OnItemClickListener?) {
+    fun setOnItemClickListener(mItemClickListener: OnItemClickListener?) {
         this.mItemClickListener = mItemClickListener
     }
 
@@ -79,7 +86,8 @@ class FacebookRecyclerAdapter(
         )
     }
 
-    inner class VideoPlayerViewHolder(private val binding: FacebookTimelineItemRecyclerListBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class VideoPlayerViewHolder(private val binding: FacebookTimelineItemRecyclerListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(model: MediaObject) {
             // handel on item click
@@ -99,7 +107,6 @@ class FacebookRecyclerAdapter(
             }
 
 
-
         }
     }
 
@@ -108,7 +115,7 @@ class FacebookRecyclerAdapter(
     override fun onVideoBuffering(player: Player) {}
 
     override fun onStartedPlaying(player: Player) {
-        Log.d("playvideo", "staaaart" + player.contentDuration)
+        Log.d("playvideo", "start" + player.contentDuration)
 
     }
 

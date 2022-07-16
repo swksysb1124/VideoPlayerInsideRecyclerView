@@ -25,7 +25,7 @@ import app.videoplayerinsiderecyclerview.viewModels.MediaViewModel
 class TikTokScreenFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
     private var mAdapter: TikTokRecyclerAdapter? = null
-    private val modelList: ArrayList<MediaObject> = ArrayList<MediaObject>()
+    private val modelList: ArrayList<MediaObject> = arrayListOf()
 
     // for handle scroll and get first visible item index
     private lateinit var scrollListener: RecyclerViewScrollListener
@@ -49,9 +49,11 @@ class TikTokScreenFragment : Fragment() {
 
         // load data
         val model: MediaViewModel by viewModels()
-        model.getMedia().observe(requireActivity(), Observer {
-            mAdapter?.updateList(arrayListOf(*it.toTypedArray()))
-        })
+        model.getMedia().observe(requireActivity(),
+            Observer {
+                mAdapter?.updateList(arrayListOf(*it.toTypedArray()))
+            }
+        )
     }
 
     private fun findViews(view: View) {
@@ -63,7 +65,7 @@ class TikTokScreenFragment : Fragment() {
         recyclerView!!.setHasFixedSize(true)
 
         // use a linear layout manager
-        val layoutManager = LinearLayoutManager(getActivity())
+        val layoutManager = LinearLayoutManager(activity)
         recyclerView!!.layoutManager = layoutManager
         recyclerView!!.adapter = mAdapter
 
@@ -74,8 +76,9 @@ class TikTokScreenFragment : Fragment() {
             override fun onItemIsFirstVisibleItem(index: Int) {
                 Log.d("visible item index", index.toString())
                 // play just visible item
-                if (index != -1)
+                if (index != -1) {
                     PlayerViewAdapter.playIndexThenPausePreviousPlayer(index)
+                }
             }
 
         }

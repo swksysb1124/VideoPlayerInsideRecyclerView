@@ -21,7 +21,7 @@ import app.videoplayerinsiderecyclerview.viewModels.MediaViewModel
 class InstagramScreenFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
     private var mAdapter: InstagramRecyclerAdapter? = null
-    private val modelList: ArrayList<MediaObject> = ArrayList<MediaObject>()
+    private val modelList: ArrayList<MediaObject> = arrayListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,9 +41,11 @@ class InstagramScreenFragment : Fragment() {
 
         // load data
         val model: MediaViewModel by viewModels()
-        model.getMedia().observe(requireActivity(), Observer {
-            mAdapter?.updateList(arrayListOf(*it.toTypedArray()))
-        })
+        model.getMedia().observe(requireActivity(),
+            Observer {
+                mAdapter?.updateList(arrayListOf(*it.toTypedArray()))
+            }
+        )
     }
 
     private fun findViews(view: View) {

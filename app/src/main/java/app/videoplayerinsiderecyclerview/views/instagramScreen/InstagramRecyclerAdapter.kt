@@ -19,8 +19,8 @@ import java.util.*
  */
 class InstagramRecyclerAdapter(
     private val mContext: Context,
-    private var modelList: ArrayList<MediaObject>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
-    PlayerStateCallback {
+    private var modelList: ArrayList<MediaObject>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), PlayerStateCallback {
     private var mItemClickListener: OnItemClickListener? = null
 
     fun updateList(modelList: ArrayList<MediaObject>) {
@@ -32,8 +32,11 @@ class InstagramRecyclerAdapter(
         viewGroup: ViewGroup,
         viewType: Int
     ): VideoPlayerViewHolder {
-        val binding: InstagramTimelineItemRecyclerBinding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context)
-            , R.layout.instagram_timeline_item_recycler, viewGroup, false)
+        val binding: InstagramTimelineItemRecyclerBinding =
+            DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context),
+                R.layout.instagram_timeline_item_recycler,
+                viewGroup,
+                false)
         return VideoPlayerViewHolder(binding)
     }
 
@@ -78,9 +81,10 @@ class InstagramRecyclerAdapter(
         )
     }
 
-    inner class VideoPlayerViewHolder(private val binding: InstagramTimelineItemRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class VideoPlayerViewHolder(private val binding: InstagramTimelineItemRecyclerBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun onBind(model: MediaObject) {
-            // handel on item click
+            // handle on item click
             binding.root.setOnClickListener {
                 mItemClickListener!!.onItemClick(
                     it,

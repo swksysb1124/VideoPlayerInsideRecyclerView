@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.videoplayerinsiderecyclerview.R
 import app.videoplayerinsiderecyclerview.models.MediaObject
-import app.videoplayerinsiderecyclerview.utils.PlayerViewAdapter.Companion.playIndexThenPausePreviousPlayer
-import app.videoplayerinsiderecyclerview.utils.PlayerViewAdapter.Companion.releaseAllPlayers
+import app.videoplayerinsiderecyclerview.utils.PlayerViewAdapter.playIndexThenPausePreviousPlayer
+import app.videoplayerinsiderecyclerview.utils.PlayerViewAdapter.releaseAllPlayers
 import app.videoplayerinsiderecyclerview.utils.RecyclerViewScrollListener
 import app.videoplayerinsiderecyclerview.viewModels.MediaViewModel
 
@@ -49,9 +49,11 @@ class FacebookScreenFragment : Fragment() {
 
         // load data
         val model: MediaViewModel by viewModels()
-        model.getMedia().observe(requireActivity(), Observer {
-            mAdapter?.updateList(arrayListOf(*it.toTypedArray()))
-        })
+        model.getMedia().observe(requireActivity(),
+            Observer {
+                mAdapter?.updateList(arrayListOf(*it.toTypedArray()))
+            }
+        )
     }
 
     private fun findViews(view: View) {
@@ -70,17 +72,20 @@ class FacebookScreenFragment : Fragment() {
             override fun onItemIsFirstVisibleItem(index: Int) {
                 Log.d("visible item index", index.toString())
                 // play just visible item
-                if (index != -1)
+                if (index != -1) {
                     playIndexThenPausePreviousPlayer(index)
+                }
             }
 
         }
         recyclerView!!.addOnScrollListener(scrollListener)
-        mAdapter!!.SetOnItemClickListener(object : FacebookRecyclerAdapter.OnItemClickListener {
-            override fun onItemClick(view: View?, position: Int, model: MediaObject?) {
+        mAdapter!!.setOnItemClickListener(
+            object : FacebookRecyclerAdapter.OnItemClickListener {
+                override fun onItemClick(view: View?, position: Int, model: MediaObject?) {
 
+                }
             }
-        })
+        )
     }
 
     override fun onPause() {
