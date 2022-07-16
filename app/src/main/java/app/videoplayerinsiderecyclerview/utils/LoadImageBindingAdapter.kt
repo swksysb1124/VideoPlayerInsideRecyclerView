@@ -19,6 +19,7 @@ class LoadImageBindingAdapter {
                         .placeholder(R.drawable.white_background)
                         .error(R.drawable.white_background))
                     .load(profileImage)
+                    .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(view)
             }

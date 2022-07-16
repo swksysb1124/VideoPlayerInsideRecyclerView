@@ -25,7 +25,7 @@
         android:orientation="vertical"
         android:weightSum="100"
         android:id="@+id/parent"
-        android:background="#fff">
+        android:background="#000">
 
         <View
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 android:id="@+id/item_video_exoplayer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:resize_mode="fill"
+                app:resize_mode="fit"
                 app:video_url="@{dataModel.media_url}"
                 app:on_state_change="@{callback}"
                 app:progressbar="@{progressBar}"
@@ -60,8 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:background="#fff"
-                android:scaleType="centerCrop"
+                android:background="#000"
+                android:scaleType="fitCenter"
                 app:thumbnail="@{dataModel.thumbnail}" />
 
             <ImageView

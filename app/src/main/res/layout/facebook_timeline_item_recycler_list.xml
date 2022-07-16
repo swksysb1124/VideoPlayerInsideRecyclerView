@@ -69,7 +69,7 @@
                 android:id="@+id/item_video_exoplayer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:resize_mode="fill"
+                app:resize_mode="zoom"
                 app:video_url="@{dataModel.media_url}"
                 app:on_state_change="@{callback}"
                 app:progressbar="@{progressBar}"
@@ -86,7 +86,7 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:background="#fff"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 app:thumbnail="@{dataModel.thumbnail}" />
 
             <ImageView
