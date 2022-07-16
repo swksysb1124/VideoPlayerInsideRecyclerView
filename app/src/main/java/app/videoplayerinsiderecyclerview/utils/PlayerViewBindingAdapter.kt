@@ -71,9 +71,9 @@ class PlayerViewAdapter {
             // We'll show the controller, change to true if want controllers as pause and start
             this.useController = false
             // Provide url to load the video from here
-            val mediaSource = ProgressiveMediaSource.Factory(DefaultHttpDataSourceFactory("Demo")).createMediaSource(Uri.parse(url))
-
-            player.prepare(mediaSource)
+            val mediaItem: MediaItem = MediaItem.fromUri(url)
+            player.setMediaItem(mediaItem)
+            player.prepare()
 
             this.player = player
 
